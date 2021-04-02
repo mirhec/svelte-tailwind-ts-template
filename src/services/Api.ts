@@ -3,7 +3,7 @@ import axios, { Method } from 'axios';
 
 // Create a instance of axios to use the same base url.
 const axiosAPI = axios.create({
-  baseURL : 'https://your.cloud/api/' // it's not recommended to have this info here.
+  baseURL : '/' // it's not recommended to have this info here.
 });
 
 // implement a method to execute all the request from here.
