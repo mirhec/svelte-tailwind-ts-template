@@ -1,18 +1,10 @@
 <script lang="ts">
-	// import LoginForm from "./components/LoginForm.svelte"
-	// import LogoutButton from "./components/LogoutButton.svelte";
-	import Chapter from './components/Chapter.svelte';
-import Layout from './components/Layout.svelte';
-	import { accessToken, refreshToken } from "./stores";
+	import BibleText from './components/BibleText.svelte';
+	import Layout from './components/Layout.svelte';
 </script>
 
-<!-- {#if $accessToken && $refreshToken}
-	<LogoutButton/>
-{:else}
-	<LoginForm/>
-{/if} -->
 <Layout>
-	<Chapter/>
+	<BibleText/>
 </Layout>
 
 <style global lang="postcss">
