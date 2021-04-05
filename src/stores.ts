@@ -14,3 +14,4 @@ export const translation = writable('ELB1905STR');
 export const originTranslation = writable('GNTTR');
 export const book = writable(40);
 export const chapter = writable(0);
+export const hoveredStrong = writable(0);
