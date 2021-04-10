@@ -1,10 +1,19 @@
 <script lang="ts">
     import { getTranslations, getOriginTranslations } from '../api/bible';
-    import { translation, chapter, book, originTranslation } from '../stores';
+    import { translation, book, chapter, originTranslation } from '../stores';
+    import { useParams } from "svelte-navigator";
+
     import Chapter from './Chapter.svelte';
     import TranslationChooser from './TranslationChooser.svelte';
-</script>
+    import { to_number } from 'svelte/internal';
 
+    const params = useParams();
+
+    $: if ('book' in $params && 'chapter' in $params) {
+        $book = to_number($params['book']);
+        $chapter = to_number($params['chapter']);
+    }
+</script>
 
 <div class="grid grid-cols-8 gap-10 mt-10">
     <div/>

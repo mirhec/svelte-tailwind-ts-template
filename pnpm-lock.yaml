@@ -4,6 +4,8 @@ dependencies:
   axios: 0.21.1
   postcss: 7.0.35
   sirv-cli: 1.0.11
+  svelte-navigator: 3.1.5_svelte@3.37.0+typescript@4.2.3
+  svelte-routing: 1.5.0_svelte@3.37.0
   tailwindcss: /@tailwindcss/postcss7-compat/2.1.0
 devDependencies:
   '@rollup/plugin-commonjs': 17.1.0_rollup@2.44.0
@@ -465,6 +467,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
+  /dedent-js/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-vuX7fJ5yfYXf+iRZDRDsGrElUwU=
   /deepmerge/4.2.2:
     dev: true
     engines:
@@ -533,7 +539,7 @@ packages:
       '@nodelib/fs.walk': 1.2.6
       glob-parent: 5.1.2
       merge2: 1.4.1
-      micromatch: 4.0.3
+      micromatch: 4.0.4
       picomatch: 2.2.3
     dev: false
     engines:
@@ -817,6 +823,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+  /lower-case/2.0.2:
+    dependencies:
+      tslib: 2.2.0
+    dev: false
+    resolution:
+      integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==
   /magic-string/0.25.7:
     dependencies:
       sourcemap-codec: 1.4.8
@@ -833,7 +845,7 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
-  /micromatch/4.0.3:
+  /micromatch/4.0.4:
     dependencies:
       braces: 3.0.2
       picomatch: 2.2.3
@@ -841,7 +853,7 @@ packages:
     engines:
       node: '>=8.6'
     resolution:
-      integrity: sha512-ueuSaP4i67F/FAUac9zzZ0Dz/5KeKDkITYIS/k4fps+9qeh1SkeH6gbljcqz97mNBOsaWZ+iv2UobMKK/yD+aw==
+      integrity: sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==
   /mime/2.5.2:
     dev: false
     engines:
@@ -882,6 +894,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==
+  /no-case/3.0.4:
+    dependencies:
+      lower-case: 2.0.2
+      tslib: 2.2.0
+    dev: false
+    resolution:
+      integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==
   /node-emoji/1.10.0:
     dependencies:
       lodash.toarray: 4.4.0
@@ -947,6 +966,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-ssN2z7EfNVE7rdFz7wu246OIORw=
+  /pascal-case/3.1.2:
+    dependencies:
+      no-case: 3.0.4
+      tslib: 2.2.0
+    dev: false
+    resolution:
+      integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==
   /path-is-absolute/1.0.1:
     engines:
       node: '>=0.10.0'
@@ -1299,6 +1325,16 @@ packages:
       svelte: ^3.24.0
     resolution:
       integrity: sha512-FMLZr/wv9S0MzCALo9BlHYyu1wlgXRdHWSjXDiknhraL9Igm0EVb00/tR6CMJ7j4q2kphRIEYcSRQJ7AtXHk+g==
+  /svelte-navigator/3.1.5_svelte@3.37.0+typescript@4.2.3:
+    dependencies:
+      svelte: 3.37.0
+      svelte2tsx: 0.1.186_svelte@3.37.0+typescript@4.2.3
+    dev: false
+    peerDependencies:
+      svelte: 3.x
+      typescript: '*'
+    resolution:
+      integrity: sha512-CGTaexasSLpUaTSN2AlYqii0JeisIgg7uZbm8XCLKlpM9Qv3IltlJ7Nvh90Xw9ND97KqtGOjNJ3LNwMN1ABV0w==
   /svelte-preprocess/4.7.0_e67b86758923188d49041eaa8c3e2c80:
     dependencies:
       '@types/pug': 2.0.4
@@ -1350,12 +1386,32 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-iNrY4YGqi0LD2e6oT9YbdSzOKntxk8gmzfqso1z/lUJOZh4o6fyIqkirmiZ8/dDJFqtIE1spVgDFWgkfhLEYlw==
+  /svelte-routing/1.5.0_svelte@3.37.0:
+    dependencies:
+      svelte: 3.37.0
+    dev: false
+    peerDependencies:
+      svelte: ^3.20.x
+    resolution:
+      integrity: sha512-4ftcSO2x5kzCUWQKm9Td6/C+t7lRjMEo72utRO0liS/aWZuRwAXOBl3y+hWZw8tV+DTGElqaAAyi44AuWXcVBg==
   /svelte/3.37.0:
     dev: true
     engines:
       node: '>= 8'
     resolution:
       integrity: sha512-TRF30F4W4+d+Jr2KzUUL1j8Mrpns/WM/WacxYlo5MMb2E5Qy2Pk1Guj6GylxsW9OnKQl1tnF8q3hG/hQ3h6VUA==
+  /svelte2tsx/0.1.186_svelte@3.37.0+typescript@4.2.3:
+    dependencies:
+      dedent-js: 1.0.1
+      pascal-case: 3.1.2
+      svelte: 3.37.0
+      typescript: 4.2.3
+    dev: false
+    peerDependencies:
+      svelte: ^3.24
+      typescript: ^4.1.2
+    resolution:
+      integrity: sha512-E4BmTNmIg6yHEqazhcQ8S60GI7AaV2JKf2y5deOyr3o2zpow4gGyz7yE0uSnFDdqp2iafCD7PImWZ/v1R6uQVw==
   /terser/5.6.1:
     dependencies:
       commander: 2.20.3
@@ -1390,6 +1446,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
+  /tslib/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
   /typescript/4.2.3:
     dev: true
     engines:
@@ -1451,7 +1511,9 @@ specifiers:
   sirv-cli: ^1.0.0
   svelte: ^3.0.0
   svelte-check: ^1.0.0
+  svelte-navigator: ^3.1.5
   svelte-preprocess: ^4.0.0
+  svelte-routing: ^1.5.0
   tailwindcss: npm:@tailwindcss/postcss7-compat
   tslib: ^2.0.0
   typescript: ^4.0.0

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
+    "start": "sirv public --single",
     "validate": "svelte-check"
   },
   "devDependencies": {
@@ -30,6 +30,7 @@
     "axios": "^0.21.1",
     "postcss": "7",
     "sirv-cli": "^1.0.0",
+    "svelte-navigator": "^3.1.5",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

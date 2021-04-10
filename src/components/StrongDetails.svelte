@@ -21,8 +21,8 @@
     }
 </script>
 
-<div class="grid grid-cols-6 prose-sm shadow-xl p-5 mt-5 mb-5 bg-blue-100 rounded-lg">
-    <div class="col-span-5">
+<div class="grid grid-cols-6 shadow-xl p-5 mt-5 mb-5 bg-blue-100 rounded-lg">
+    <div class="prose-sm col-span-5">
         <h3>Details for {$book <= 39 ? "hebrew" : "greek"} strong #{strongNumber}</h3>
         {#await response}
             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -39,6 +39,7 @@
                 </ul>
             </div>
         {/await}
+        <a class="mt-2" href="#">Show all occurences >></a>
     </div>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg h-10" on:click={closeButtonClicked}>Close</button>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-lg h-10 text-xs" on:click={closeButtonClicked}>Close</button>
 </div>

@@ -1,11 +1,15 @@
 <script lang="ts">
-	import BibleText from './components/BibleText.svelte';
+	import { Router } from "svelte-navigator";
+
 	import Layout from './components/Layout.svelte';
+	import AllRoutes from "./routes/AllRoutes.svelte";
+
+	export let url = "";
 </script>
 
-<Layout>
-	<BibleText/>
-</Layout>
+<Router url="{url}">
+	<AllRoutes />
+</Router>
 
 <style global lang="postcss">
 	@tailwind base;
