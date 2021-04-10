@@ -24,11 +24,11 @@
 	<!-- END Logo text or image -->
 
 	<!-- Search field -->
-	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click="{decrementChapter}">
+	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" on:click="{decrementChapter}">
 		Previous
 	</button>
 	<SearchField/>
-	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click="{incrementChapter}">
+	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" on:click="{incrementChapter}">
 		Next
 	</button>
 	<!-- END Search field -->

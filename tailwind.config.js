@@ -7,7 +7,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
   },
   plugins: [
-
+    require('@tailwindcss/typography')
   ],
   purge: {
     content: [

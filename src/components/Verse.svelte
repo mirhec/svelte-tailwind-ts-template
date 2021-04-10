@@ -6,7 +6,7 @@ import StrongDetails from "./StrongDetails.svelte";
     let detailStrong: Number;
 </script>
 
-<p class="mb-2"><sup class="text-blue-400">{verse['verse'] + 1}</sup>
+<p class="mb-2 prose-lg"><sup class="text-blue-400">{verse['verse'] + 1}</sup>
     {#each verse['chunks'] as chunk }
         {#if chunk['strong']}
             <span>{chunk['text']}
@@ -24,7 +24,7 @@ import StrongDetails from "./StrongDetails.svelte";
     {/each}
 </p>
 {#if detailStrong > 0}
-    <StrongDetails bind:strongNumber={detailStrong} />
+    <StrongDetails bind:strongNumber={detailStrong} on:close={() => detailStrong = 0} />
     <!-- <h3>Details zu Strong #{detailStrong}</h3>
     <button on:click={() => detailStrong = 0}>Close</button> -->
 {/if}
