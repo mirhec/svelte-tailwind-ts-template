@@ -1,6 +1,6 @@
 <script>
 	import SearchField from "./SearchField.svelte";
-	import { book, chapter, chapterCount } from "../stores";
+	import { book, bookNames, chapter, chapterCount, lang, searchText } from "../stores";
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
 
@@ -11,7 +11,7 @@
 		if (newBook > 1 && newChapter < 0) {
 			newBook -= 1;
 			newChapter = chapterCount[newBook] - 1;
-		} else if (newBook <= 1) {
+		} else if (newBook <= 0) {
 			newChapter = 0;
 		}
 
@@ -21,7 +21,7 @@
 		} else if (newBook >= 65) {
 			newChapter = chapterCount[newBook] - 1;
 		}
-		console.log(newChapter);
+		$searchText = bookNames[$lang]['long'][newBook] + " " + (newChapter + 1);
 		navigate(`/${newBook}/${newChapter}`);
 	}
 

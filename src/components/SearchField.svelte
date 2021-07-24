@@ -1,16 +1,13 @@
 <script>
     import { searchText, bookNames, lang } from "../stores";
     import AutoComplete from "simple-svelte-autocomplete";
-	import { useParams, useNavigate } from "svelte-navigator";
+	import { useNavigate } from "svelte-navigator";
 
 	const navigate = useNavigate();
 
     let longBibleBooks = bookNames[$lang]["long"];
     let searchStrings = bookNames[$lang]["search"];
-    let selected = '';
     const regex = /([0-9]?.?\s?[a-zA-ZäöüÄÖÜ]+)[^a-zA-Z0-9]?([0-9]+)?[^a-zA-Z0-9]?([0-9]+)?/;
-    // const regex = /(.+)\s?([0-9]+)?.?([0-9]+)?/;
-    // const regex = /(.+).*([0-9]+)?.*([0-9]+)?/;
 
     function getItems(text) {
         const result = regex.exec(text);
@@ -29,14 +26,14 @@
     };
 
     function search() {
-        const result = regex.exec(selected);
+        const result = regex.exec($searchText);
         if (result != null) {
             var book = result[1];
             var chapter = result[2];
             // var vers = result[3];
             var bookIndex = bookNames[$lang]["long"].indexOf(book);
             if (bookIndex > -1) {
-                navigate(`/${bookIndex}/${chapter}`);
+                navigate(`/${bookIndex}/${chapter-1}`);
             }
         }
     }
@@ -49,7 +46,7 @@
 <div class="field has-addons">
     <p class="control">
         <!-- <input class="input is-primary" type="text" placeholder="Suche" on:keypress={onKeyPress} bind:value={$searchText}> -->
-        <AutoComplete localFiltering={false} searchFunction={getItems} bind:selectedItem={selected} />
+        <AutoComplete localFiltering={false} searchFunction={getItems} bind:selectedItem={$searchText} />
     </p>
     <p class="control">
         <button class="button is-primary" on:click={search}> Suchen </button>
