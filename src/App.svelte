@@ -12,7 +12,7 @@
 </Router>
 
 <style global lang="postcss">
-	@tailwind base;
+	/* @tailwind base;
 	@tailwind components;
-	@tailwind utilities;
+	@tailwind utilities; */
 </style>

@@ -44,7 +44,7 @@ export default {
 				sourceMap: !production,
 				postcss: {
 				  plugins: [
-				   require("tailwindcss"),
+				//    require("tailwindcss"),
 				   require("autoprefixer"),
 				  ],
 				},

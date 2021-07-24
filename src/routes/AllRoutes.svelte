@@ -14,6 +14,11 @@
         <BibleText />
     </Layout>
 </Route>
+<Route path="/strongs/hebrew/:hebrew_strong" let:params>
+    <Layout>
+        <BibleText />
+    </Layout>
+</Route>
 <Route path="/">
     <Layout>
         <BibleText />

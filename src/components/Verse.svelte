@@ -2,16 +2,17 @@
     import { Link } from 'svelte-navigator';
     import { to_number } from "svelte/internal";
     import { getVerse } from "../api/bible";
-    import { hoveredStrong, translation, lang } from "../stores";
+    import { hoveredStrong, translation, lang, bookNames } from "../stores";
+    import Spinner from './Spinner.svelte';
     import StrongDetails from "./StrongDetails.svelte";
-    import bookNames from 'bible-book-names';
 
     export var verse: Object;
     export var ref: String;
-    var refBook: Number;
-    var refChapter: Number;
-    var refVerse: Number;
+    var refBook: number;
+    var refChapter: number;
+    var refVerse: number;
 
+    let verseResult: Promise<Object>;
     let detailStrong: Number;
 
     $: if (!!ref) {
@@ -27,16 +28,16 @@
 </script>
 
 {#if !!verse}
-    <p class="mb-2 prose-lg">
+    <p class="mb-2 has-text-justified">
         {#if !ref}
-            <sup class="text-blue-400">{verse['verse'] + 1}</sup>
+            <sup class="is-size-7 has-text-primary">{verse['verse'] + 1}</sup>
         {:else}
-            <sup class="text-blue-400"><Link to="/{refBook}/{refChapter}/{refVerse}">{bookNames[$lang][refBook]} {refChapter + 1},{refVerse + 1}</Link></sup>
+            <sup class="is-size-7 has-text-primary"><Link to="/{refBook}/{refChapter}/{refVerse}">{bookNames[$lang]['short'][refBook]} {refChapter + 1},{refVerse + 1}</Link></sup>
         {/if}
         {#each verse['chunks'] as chunk }
             {#if chunk['strong']}
-                <span>{chunk['text']}
-                    <sup class="text-gray-400 cursor-pointer"
+                <span class="is-size-5">{chunk['text']}
+                    <sup class="is-size-7 has-text-grey-light is-clickable"
                         class:bg-yellow-100={$hoveredStrong == chunk['strong']['number']}
                         on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
                         on:click={() => detailStrong = detailStrong > 0 ? 0 : chunk['strong']['number']}>
@@ -45,11 +46,13 @@
                     {' '}
                 </span>
             {:else}
-                <span>{chunk['text'] + ' '}</span>
+                <span class="is-size-5">{chunk['text'] + ' '}</span>
             {/if}
         {/each}
     </p>
     {#if detailStrong > 0}
         <StrongDetails bind:strongNumber={detailStrong} on:close={() => detailStrong = 0} />
     {/if}
+<!-- {:else}
+    <Spinner/> -->
 {/if}

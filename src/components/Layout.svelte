@@ -1,10 +1,10 @@
 <script>
 	import SearchField from "./SearchField.svelte";
-	import { book, chapter, chapterCount } from '../stores';
-    import { useParams, useNavigate } from "svelte-navigator";
+	import { book, chapter, chapterCount } from "../stores";
+	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
 
-    const params = useParams();
+	const params = useParams();
 	const navigate = useNavigate();
 
 	function doNavigation(newBook, newChapter) {
@@ -28,9 +28,9 @@
 	function incrementChapter() {
 		let newChapter = $chapter;
 		let newBook = $book;
-		if('chapter' in $params && 'book' in $params) {
-			newChapter = to_number($params['chapter']) + 1;
-			newBook = to_number($params['book']);
+		if ("chapter" in $params && "book" in $params) {
+			newChapter = to_number($params["chapter"]) + 1;
+			newBook = to_number($params["book"]);
 		} else {
 			newChapter += 1;
 		}
@@ -39,9 +39,9 @@
 	function decrementChapter() {
 		let newChapter = $chapter;
 		let newBook = $book;
-		if('chapter' in $params && 'book' in $params) {
-			newChapter = to_number($params['chapter']) - 1;
-			newBook = to_number($params['book']);
+		if ("chapter" in $params && "book" in $params) {
+			newChapter = to_number($params["chapter"]) - 1;
+			newBook = to_number($params["book"]);
 		} else {
 			newChapter -= 1;
 		}
@@ -50,43 +50,50 @@
 	}
 </script>
 
-<header class="border-b md:flex md:items-center md:justify-between p-4 pb-0 shadow-lg md:pb-4">
-	<!-- Logo text or image -->
-	<div class="flex items-center justify-between mb-4 md:mb-0">
-		<h1 class="leading-none text-2xl text-grey-darkest">
-			<a class="no-underline text-grey-darkest hover:text-black" href="#">strongs.de</a>
-		</h1>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+		<a class="navbar-item" href="https://bulma.io">
+			<img
+				src="https://strongs.de/static/images/logo.png"
+			/>
+		</a>
 
-		<a class="text-black hover:text-orange md:hidden" href="#">
-			<i class="fa fa-2x fa-bars" />
+		<a
+			role="button"
+			class="navbar-burger"
+			aria-label="menu"
+			aria-expanded="false"
+			data-target="navbarBasicExample"
+		>
+			<span aria-hidden="true" />
+			<span aria-hidden="true" />
+			<span aria-hidden="true" />
 		</a>
 	</div>
-	<!-- END Logo text or image -->
 
-	<!-- Search field -->
-	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" on:click="{decrementChapter}">
-		Previous
-	</button>
-	<SearchField/>
-	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" on:click="{incrementChapter}">
-		Next
-	</button>
-	<!-- END Search field -->
+	<div class="navbar-menu">
+		<div class="navbar-start navbar-start--centered">
+			<div class="navbar-item">
+				<button class="button" on:click={decrementChapter}>Previous</button>
+			</div>
+			<div class="navbar-item">
+				<SearchField/>
+			</div>
+			<div class="navbar-item">
+				<button class="button" on:click={incrementChapter}>Next</button>
+			</div>
+		</div>
 
-	<!-- Global navigation -->
-	<nav>
-		<ul class="list-reset md:flex md:items-center">
-			<li class="md:ml-4">
-				<a
-					class="block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0"
-					href="#"
-				>
-					Impressum
-				</a>
-			</li>
-		</ul>
-	</nav>
-	<!-- END Global navigation -->
-</header>
+		<div class="navbar-end">
+		</div>
+	</div>
+</nav>
 
 <slot />
+
+<style lang="css">
+	.navbar-start--centered {
+		flex-grow: 1;
+		justify-content: center;
+	}
+</style>
