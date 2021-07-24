@@ -4,7 +4,12 @@
     import Layout from "../components/Layout.svelte";
 </script>
 
-<Route path="/:book/:chapter" let:params>
+<Route path="/:book/:chapter/*" let:params>
+    <Layout>
+        <BibleText />
+    </Layout>
+</Route>
+<Route path="/strongs/greek/:greek_strong" let:params>
     <Layout>
         <BibleText />
     </Layout>

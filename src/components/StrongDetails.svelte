@@ -1,5 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
+    import { Link } from "svelte-navigator";
     import { getStrongDetails } from "../api/bible";
     import { book, translation } from "../stores";
 
@@ -9,7 +10,7 @@
     let response: Promise<Object>;
 
     $: if(strongNumber > 0) {
-        response = getStrongDetails($translation, $book, strongNumber);
+        response = getStrongDetails($translation, $book < 39 ? 'hebrew' : 'greek', strongNumber);
     }
 
     function getVariants(variants: Array<Object>) {
@@ -39,7 +40,12 @@
                 </ul>
             </div>
         {/await}
-        <a class="mt-2" href="#">Show all occurences >></a>
+        <!-- <a class="mt-2" href="#">Show all occurences >></a> -->
+        {#if $book < 39}
+            <Link class="mt-2" to="/strongs/hebrew/{strongNumber}">Show all occurences >></Link>
+        {:else}
+            <Link class="mt-2" to="/strongs/greek/{strongNumber}">Show all occurences >></Link>
+        {/if}
     </div>
     <button class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-lg h-10 text-xs" on:click={closeButtonClicked}>Close</button>
 </div>
