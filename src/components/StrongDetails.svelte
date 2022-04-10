@@ -1,14 +1,18 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import { Link } from "svelte-navigator";
-    import { getStrongDetails } from "../api/bible";
-    import { book, translation } from "../stores";
+    import { getStrongDetails, getVerse } from "../api/bible";
+    import { book, chapter, originTranslation, translation } from "../stores";
     import Spinner from "./Spinner.svelte";
 
     const dispatch = createEventDispatcher();
 
     export var strongNumber: Number;
+    export var verseNumber: Number;
     let response: Promise<Object>;
+    let originalVerse: Promise<Object>;
+    let wordGrammar: string;
+    let wordGrammarUnsure = false;
 
     $: if (strongNumber > 0) {
         response = getStrongDetails(
@@ -16,6 +20,18 @@
             $book < 39 ? "hebrew" : "greek",
             strongNumber
         );
+        // originalVerse = getVerse($originTranslation, $book, $chapter, verseNumber);
+        getVerse($originTranslation, $book, $chapter, verseNumber).then(verse => {
+            verse['chunks'].forEach(chunk => {
+                if (chunk['strong'] && chunk['strong']['number'] === strongNumber) {
+                    let grammar = chunk['strong']['grammar'];
+                    if (wordGrammar && grammar !== wordGrammar) {
+                        wordGrammarUnsure = true;
+                    }
+                    if (!wordGrammar) wordGrammar = grammar;
+                }
+            });
+        });
     }
 
     function getVariants(variants: Array<Object>) {
@@ -47,6 +63,14 @@
             </div>
         </div>
 
+        <div class="panel-block">
+            {#if wordGrammar && wordGrammarUnsure}
+                <span><b>Grammar: </b> {wordGrammar} (unsure)</span>
+            {:else if wordGrammar}
+                <span><b>Grammar: </b> {wordGrammar}</span>
+            {/if}
+        </div>
+
             {#if $book < 39}
                 <Link class="panel-block" to="/strongs/hebrew/{strongNumber}"
                     >Show all occurences >></Link
@@ -56,7 +80,7 @@
                     >Show all occurences >></Link
                 >
             {/if}
-        <!-- </div> -->
+
         <div class="panel-block">
             <button class="button card-footer-item" on:click={closeButtonClicked}>Close</button>
         </div>

@@ -51,7 +51,7 @@
 
 <div class="field has-addons">
     <p class="control">
-        <Autocomplete searchFunction={getItems} bind:query={$searchText} bind:selectedItem={selectedItem} />
+        <Autocomplete placeholder="Type passage ..." searchFunction={getItems} bind:query={$searchText} bind:selectedItem={selectedItem} />
     </p>
     <p class="control">
         <button class="button is-primary" on:click={search}> Suchen </button>
