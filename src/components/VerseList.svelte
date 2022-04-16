@@ -19,7 +19,7 @@
 
 {#if !!refs}
     {#each refs as ref}
-        <Verse {ref} />
+        <Verse translation={translation} {ref} />
     {/each}
 {:else}
     {#await chapterResult}
@@ -27,7 +27,7 @@
     {:then chapter}
         {#if !!chapter && "verses" in chapter}
             {#each chapter["verses"] as verse}
-                <Verse {verse} />
+                <Verse translation={translation} {verse} />
             {/each}
         {:else}
             <p>This chapter does not exist in this translation ...</p>

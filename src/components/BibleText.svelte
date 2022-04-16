@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getTranslations, getOriginTranslations, getStrongDetails } from '../api/bible';
-    import { translation, book, chapter, originTranslation } from '../stores';
+    import { translation, translation2, book, chapter, originTranslation } from '../stores';
     import { useParams } from "svelte-navigator";
 
     import VerseList from './VerseList.svelte';
@@ -29,13 +29,27 @@
                 {#if 'greek_strong' in $params || 'hebrew_strong' in $params}
                     {#await strongDetails then details}
                         {#if details && 'refs' in details}
-                            <VerseList refs={details['refs']} />
+                            <VerseList translation={$translation} refs={details['refs']} />
                         {:else}
                             <p>No verses found for {'greek_strong' in $params ? 'greek' : 'hebrew'} strong number {$params['greek_strong'] ?? $params['hebrew_strong']} ...</p>
                         {/if}
                     {/await}
                 {:else}
                     <VerseList translation={$translation} book={$book} chapter={$chapter} />
+                {/if}
+            </div>
+            <div class="column is-half is-hidden-mobile">
+                <TranslationChooser class="mb-5" translations={getTranslations()} bind:selected={$translation2} />
+                {#if 'greek_strong' in $params || 'hebrew_strong' in $params}
+                    {#await strongDetails then details}
+                        {#if details && 'refs' in details}
+                            <VerseList translation={$translation2} refs={details['refs']} />
+                        {:else}
+                            <p>No verses found for {'greek_strong' in $params ? 'greek' : 'hebrew'} strong number {$params['greek_strong'] ?? $params['hebrew_strong']} ...</p>
+                        {/if}
+                    {/await}
+                {:else}
+                    <VerseList translation={$translation2} book={$book} chapter={$chapter} />
                 {/if}
             </div>
         </div>

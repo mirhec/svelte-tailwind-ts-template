@@ -2,7 +2,7 @@
     import { Link } from 'svelte-navigator';
     import { to_number } from "svelte/internal";
     import { getVerse } from "../api/bible";
-    import { hoveredStrong, translation, lang, bookNames } from "../stores";
+    import { hoveredStrong, lang, bookNames } from "../stores";
     import Spinner from './Spinner.svelte';
     import StrongDetails from "./StrongDetails.svelte";
 
@@ -12,6 +12,7 @@
     var refChapter: number;
     var refVerse: number;
     let strongWordDisplayVariant = 2;
+    export var translation: String;
 
     let verseResult: Promise<Object>;
     let detailStrong: Number;
@@ -22,7 +23,7 @@
             refBook = to_number(parts[0]);
             refChapter = to_number(parts[1]);
             refVerse = to_number(parts[2]);
-            getVerse($translation, refBook, refChapter, refVerse)
+            getVerse(translation, refBook, refChapter, refVerse)
                 .then(res => verse = res);
         }
     }
