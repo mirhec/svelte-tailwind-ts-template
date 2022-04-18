@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Router, Link, Route } from "svelte-navigator";
+	import { Route } from "svelte-navigator";
     import BibleText from "../components/BibleText.svelte";
     import Layout from "../components/Layout.svelte";
 </script>

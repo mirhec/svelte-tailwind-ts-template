@@ -3,7 +3,6 @@
     import { to_number } from "svelte/internal";
     import { getVerse } from "../api/bible";
     import { hoveredStrong, lang, bookNames } from "../stores";
-    import Spinner from './Spinner.svelte';
     import StrongDetails from "./StrongDetails.svelte";
 
     export var verse: Object;

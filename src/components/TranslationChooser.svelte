@@ -1,13 +1,6 @@
 <script lang="ts">
-    // import { createEventDispatcher } from 'svelte';
-
     export var translations: Array<Object>;
     export var selected: String;
-    // const dispatch = createEventDispatcher();
-
-	// $: dispatch('translationChanged', {
-	// 	identifier: selected
-	// });
 </script>
 
 <div class={$$props.class}>
