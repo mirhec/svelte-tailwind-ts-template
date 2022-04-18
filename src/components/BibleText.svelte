@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { getTranslations, getOriginTranslations, getStrongDetails } from '../api/bible';
-    import { translation, translation2, book, chapter, originTranslation } from '../stores';
+    import { getTranslations, getStrongDetails } from '../api/bible';
+    import { translation, translation2, book, chapter } from '../stores';
     import { useParams } from "svelte-navigator";
 
     import VerseList from './VerseList.svelte';
@@ -9,6 +9,7 @@
 
     let refs = [];
     let strongDetails: Promise<Object>;
+    let translations = getTranslations();
 
     const params = useParams();
 
@@ -25,7 +26,9 @@
     <div class="conatiner">
         <div class="columns is-centered">
             <div class="column is-half">
-                <TranslationChooser class="mb-5" translations={getTranslations()} bind:selected={$translation} />
+                {#await translations then translationList}
+                    <TranslationChooser class="mb-5" translations={translationList} bind:selected={$translation} />
+                {/await}
                 {#if 'greek_strong' in $params || 'hebrew_strong' in $params}
                     {#await strongDetails then details}
                         {#if details && 'refs' in details}
@@ -39,7 +42,9 @@
                 {/if}
             </div>
             <div class="column is-half is-hidden-mobile">
-                <TranslationChooser class="mb-5" translations={getTranslations()} bind:selected={$translation2} />
+                {#await translations then translationList}
+                    <TranslationChooser class="mb-5" translations={translationList} bind:selected={$translation2} />
+                {/await}
                 {#if 'greek_strong' in $params || 'hebrew_strong' in $params}
                     {#await strongDetails then details}
                         {#if details && 'refs' in details}
