@@ -22,7 +22,6 @@
           selectedItem = matches[activeIndex];
         } else {
           selectedItem = query;
-          console.log('selectedItem: ' + selectedItem);
         }
       } else if (e.keyCode == 38) {
         // up

@@ -1,31 +1,20 @@
 <script lang="ts">
 	import { Route } from "svelte-navigator";
-    import BibleText from "../components/BibleText.svelte";
     import Layout from "../components/Layout.svelte";
 </script>
 
 <Route path="/:book/:chapter/*" let:params>
-    <Layout>
-        <BibleText />
-    </Layout>
+    <Layout/>
 </Route>
 <Route path="/strongs/greek/:greek_strong" let:params>
-    <Layout>
-        <BibleText />
-    </Layout>
+    <Layout/>
 </Route>
 <Route path="/strongs/hebrew/:hebrew_strong" let:params>
-    <Layout>
-        <BibleText />
-    </Layout>
+    <Layout/>
 </Route>
 <Route path="/:query" let:params>
-    <Layout>
-        <BibleText />
-    </Layout>
+    <Layout/>
 </Route>
 <Route path="/">
-    <Layout>
-        <BibleText />
-    </Layout>
+    <Layout/>
 </Route>

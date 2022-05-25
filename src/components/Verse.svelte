@@ -13,7 +13,6 @@
     let strongWordDisplayVariant = 2;
     export var translation: String;
 
-    let verseResult: Promise<Object>;
     let detailStrong: Number;
 
     $: if (!!ref) {
@@ -67,8 +66,6 @@
     {#if detailStrong > 0}
         <StrongDetails bind:verseNumber={verse['verse']} bind:strongNumber={detailStrong} on:close={() => detailStrong = 0} />
     {/if}
-<!-- {:else}
-    <Spinner/> -->
 {/if}
 
 <style>

@@ -15,8 +15,6 @@
     }
 </script>
 
-<!-- {translation} -->
-
 {#if !!refs}
     {#each refs as ref}
         <Verse translation={translation} {ref} />

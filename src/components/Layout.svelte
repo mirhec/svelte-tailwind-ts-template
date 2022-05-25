@@ -1,11 +1,14 @@
 <script>
+    import BibleText from "../components/BibleText.svelte";
 	import SearchField from "./SearchField.svelte";
-	import { book, bookNames, chapter, chapterCount, lang, searchText } from "../stores";
+	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2 } from "../stores";
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
+    import { getTranslations } from '../api/bible';
 
 	const params = useParams();
 	const navigate = useNavigate();
+	const translations = getTranslations();
 
 	function doNavigation(newBook, newChapter) {
 		if (newBook > 1 && newChapter < 0) {
@@ -45,7 +48,6 @@
 		} else {
 			newChapter -= 1;
 		}
-		console.log(newChapter);
 		doNavigation(newBook, newChapter);
 	}
 </script>
@@ -89,7 +91,20 @@
 	</div>
 </nav>
 
-<slot />
+<section class="section">
+    <div class="conatiner">
+        <div class="columns is-centered">
+			{#await translations then translationList}
+				<div class="column is-half">
+					<BibleText bind:translation={$translation1} translations={translationList} />
+				</div>
+				<div class="column is-half">
+					<BibleText bind:translation={$translation2} translations={translationList} />
+				</div>
+			{/await}
+        </div>
+    </div>
+</section>
 
 <style lang="css">
 	.navbar-start--centered {
