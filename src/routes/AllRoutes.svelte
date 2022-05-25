@@ -19,6 +19,11 @@
         <BibleText />
     </Layout>
 </Route>
+<Route path="/:query" let:params>
+    <Layout>
+        <BibleText />
+    </Layout>
+</Route>
 <Route path="/">
     <Layout>
         <BibleText />

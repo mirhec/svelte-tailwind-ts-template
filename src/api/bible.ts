@@ -1,8 +1,8 @@
 import Api from "../services/Api";
 
-function delay(ms: number) {
-  return new Promise( resolve => setTimeout(resolve, ms) );
-}
+// function delay(ms: number) {
+//   return new Promise( resolve => setTimeout(resolve, ms) );
+// }
 
 // export const getOriginTranslations = () => {
 //   return [
@@ -54,3 +54,12 @@ export const getStrongDetailsByBook = async (translation: String, book: Number, 
       console.error(error);
     }
 };
+
+export const getSearchResults = async (translation: String, query: String) => {
+    try {
+        const response = await Api.get(`/${translation}/${query}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}

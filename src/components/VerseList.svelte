@@ -4,9 +4,9 @@
     import Verse from "./Verse.svelte";
 
     export var translation: String;
-    export var book: Number;
-    export var chapter: Number;
-    export var refs: Array<String>;
+    export var book: Number = undefined;
+    export var chapter: Number = undefined;
+    export var refs: Array<String> = undefined;
 
     let chapterResult: Promise<Object>;
 

@@ -36,17 +36,16 @@
         if (result != null) {
             var book = result[1];
             var chapter = result[2];
-            // var vers = result[3];
             var bookIndex = bookNames[$lang]["long"].indexOf(book);
             if (bookIndex > -1) {
                 navigate(`/${bookIndex}/${chapter-1}`);
+            } else {
+                navigate(`/${$searchText}`);
             }
+        } else {
+            navigate(`/${$searchText}`);
         }
     }
-
-    function onKeyPress(e) {
-        if (e.charCode === 13) search();
-    };
 </script>
 
 <div class="field has-addons">

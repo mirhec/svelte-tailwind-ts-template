@@ -13,6 +13,27 @@
         query = selectedItem;
         matches = [];
     }
+
+    $: if (query) activeIndex = -1;
+
+    function inputChanged(e) {
+      if (e.key == 'Enter') {
+        if (activeIndex > -1) {
+          selectedItem = matches[activeIndex];
+        } else {
+          selectedItem = query;
+          console.log('selectedItem: ' + selectedItem);
+        }
+      } else if (e.keyCode == 38) {
+        // up
+        activeIndex -= activeIndex > 0 ? 1 : 0;
+      } else if (e.keyCode == 40) {
+        // down
+        activeIndex += activeIndex < matches.length - 1 ? 1 : 0;
+      } else {
+        matches = searchFunction(query);
+      }
+    }
 </script>
 
 <div class="field">
@@ -27,7 +48,7 @@
             class="input"
             name={name}
             bind:value={query}
-            on:keyup={() => matches = searchFunction(query)}
+            on:keyup={inputChanged}
             placeholder={placeholder}
           />
         </div>
@@ -35,7 +56,7 @@
             {#if matches.length > 0}
                 <div class="dropdown-content">
                     {#each matches as match, index}
-                        <a class={`dropdown-item ${index === activeIndex ? "is-active" : ""}`}
+                        <a class={`dropdown-item ${index == activeIndex ? "is-active" : ""}`}
                            on:click={() => selectedItem = match}
                         >
                             {match}

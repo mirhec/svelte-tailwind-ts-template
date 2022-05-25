@@ -5,8 +5,8 @@
     import { hoveredStrong, lang, bookNames } from "../stores";
     import StrongDetails from "./StrongDetails.svelte";
 
-    export var verse: Object;
-    export var ref: String;
+    export var verse: Object = undefined;
+    export var ref: String = undefined;
     var refBook: number;
     var refChapter: number;
     var refVerse: number;
