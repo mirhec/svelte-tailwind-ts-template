@@ -7,6 +7,7 @@
     export var book: Number = undefined;
     export var chapter: Number = undefined;
     export var refs: Array<String> = undefined;
+    export var refsWithContent: Array<Object> = undefined;
 
     let chapterResult: Promise<Object>;
 
@@ -17,7 +18,11 @@
 
 {#if !!refs}
     {#each refs as ref}
-        <Verse translation={translation} {ref} />
+        <Verse translation={translation} verseRef={ref} />
+    {/each}
+{:else if !!refsWithContent}
+    {#each refsWithContent as verseRef}
+        <Verse translation={translation} {verseRef} />
     {/each}
 {:else}
     {#await chapterResult}

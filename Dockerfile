@@ -17,7 +17,7 @@ COPY ./public ./public
 RUN pnpm run build
 
 
-FROM mirhec/bible-cli:0.2.4
+FROM mirhec/bible-cli:0.2.5
 
 RUN  apt-get update \
   && apt-get install -y wget \

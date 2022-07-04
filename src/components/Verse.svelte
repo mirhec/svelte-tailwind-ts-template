@@ -6,6 +6,7 @@
     import StrongDetails from "./StrongDetails.svelte";
 
     export var verse: Object = undefined;
+    export var verseRef: Object = undefined;
     export var ref: String = undefined;
     var refBook: number;
     var refChapter: number;
@@ -14,6 +15,13 @@
     export var translation: String;
 
     let detailStrong: Number;
+
+    $: if (!!verseRef) {
+        refBook = verseRef['book'];
+        refChapter = verseRef['chapter'];
+        refVerse = verseRef['verse'];
+        verse = verseRef;
+    }
 
     $: if (!!ref) {
         let parts = ref.split('_');
@@ -29,7 +37,7 @@
 
 {#if !!verse}
     <p class="mb-2 has-text-justified">
-        {#if !ref}
+        {#if !ref && !verseRef}
             <sup class="is-size-7 has-text-primary">{verse['verse'] + 1}</sup>
         {:else}
             <sup class="is-size-7 has-text-primary"><Link to="/{refBook}/{refChapter}/{refVerse}">{bookNames[$lang]['short'][refBook]} {refChapter + 1},{refVerse + 1}</Link></sup>
