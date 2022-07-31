@@ -1,7 +1,8 @@
 <script>
     import BibleText from "../components/BibleText.svelte";
 	import SearchField from "./SearchField.svelte";
-	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2 } from "../stores";
+	import StrongDetails from "./StrongDetails.svelte";
+	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2, detailStrong } from "../stores";
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
     import { getTranslations } from '../api/bible';
@@ -102,6 +103,9 @@
 					<BibleText bind:translation={$translation2} translations={translationList} />
 				</div>
 			{/await}
+			{#if $detailStrong.strongNr > 0}
+				<StrongDetails bind:verseNumber={$detailStrong.verseNr} bind:strongNumber={$detailStrong.strongNr} on:close={() => $detailStrong.strongNr = -1} />
+			{/if}
         </div>
     </div>
 </section>

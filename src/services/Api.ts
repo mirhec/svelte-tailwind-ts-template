@@ -1,11 +1,12 @@
 // Api.js
-import axios, { Method } from 'axios';
+import axios from 'axios';
+import type { Method } from 'axios';
 
 // Create a instance of axios to use the same base url.
 const axiosAPI = axios.create({
   // baseURL : '/' // it's not recommended to have this info here.
-  // baseURL : 'http://localhost:8000/api' // it's not recommended to have this info here.
-  baseURL: '/api'
+  baseURL : 'http://localhost:8000/api' // it's not recommended to have this info here.
+  // baseURL: '/api'
 });
 
 // implement a method to execute all the request from here.

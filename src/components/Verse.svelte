@@ -2,8 +2,7 @@
     import { Link } from 'svelte-navigator';
     import { to_number } from "svelte/internal";
     import { getVerse } from "../api/bible";
-    import { hoveredStrong, lang, bookNames } from "../stores";
-    import StrongDetails from "./StrongDetails.svelte";
+    import { hoveredStrong, lang, bookNames, detailStrong } from "../stores";
 
     export var verse: Object = undefined;
     export var verseRef: Object = undefined;
@@ -14,7 +13,7 @@
     let strongWordDisplayVariant = 2;
     export var translation: String;
 
-    let detailStrong: Number;
+    // let detailStrong: Number;
 
     $: if (!!verseRef) {
         refBook = verseRef['book'];
@@ -33,6 +32,13 @@
                 .then(res => verse = res);
         }
     }
+
+    const setStrongNr = (strongNr: number) => {
+        $detailStrong = {
+            strongNr,
+            verseNr: refVerse ?? verse['verse']
+        }
+    };
 </script>
 
 {#if !!verse}
@@ -49,7 +55,7 @@
                         <sup class="is-size-7 has-text-grey-light is-clickable"
                             class:has-background-warning={$hoveredStrong == chunk['strong']['number']}
                             on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
-                            on:click={() => detailStrong = detailStrong > 0 ? 0 : chunk['strong']['number']}>
+                            on:click={() => setStrongNr(chunk['strong']['number'])}>
                             {chunk['strong']['number']}
                         </sup>
                         {' '}
@@ -59,7 +65,7 @@
                         <span class="is-size-5 strong-verse"
                             class:has-background-warning={$hoveredStrong === chunk['strong']['number']}
                             on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
-                            on:click={() => detailStrong = detailStrong > 0 ? 0 : chunk['strong']['number']}>
+                            on:click={() => setStrongNr(chunk['strong']['number'])}>
 
                             {chunk['text']}
                         </span>
@@ -71,9 +77,6 @@
             {/if}
         {/each}
     </p>
-    {#if detailStrong > 0}
-        <StrongDetails bind:verseNumber={verse['verse']} bind:strongNumber={detailStrong} on:close={() => detailStrong = 0} />
-    {/if}
 {/if}
 
 <style>
