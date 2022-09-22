@@ -10,7 +10,7 @@ translation3.subscribe(value => localStorage.setItem('translation3', value || un
 
 export const searchText = writable('');
 export const originTranslation = writable('GNTTR');
-export const book = writable(40);
+export const book = writable(39);
 export const chapter = writable(0);
 export const hoveredStrong = writable(0);
 export const lang = writable('en');

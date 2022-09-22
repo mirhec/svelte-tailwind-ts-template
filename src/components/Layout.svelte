@@ -111,7 +111,7 @@
 				</div>
 			{/await}
 			{#if $detailStrong.strongNr > 0}
-				<StrongDetails bind:verseNumber={$detailStrong.verseNr} bind:strongNumber={$detailStrong.strongNr} on:close={() => $detailStrong.strongNr = -1} />
+				<StrongDetails on:close={() => $detailStrong.strongNr = -1} />
 			{/if}
         </div>
     </div>
