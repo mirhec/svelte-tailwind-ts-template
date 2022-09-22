@@ -15,7 +15,7 @@
         search();
     }
 
-    function getItems(text) {
+    const getItems = (text) => {
         const result = regex.exec(text);
         let results = [];
         if(result != null) {
@@ -31,7 +31,7 @@
         return results;
     };
 
-    function search() {
+    const search = () => {
         const result = regex.exec($searchText);
         if (result != null) {
             var book = result[1];

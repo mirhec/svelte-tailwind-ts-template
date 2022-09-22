@@ -29,14 +29,14 @@
         });
     }
 
-    function getVariants(variants: Array<Object>) {
+    const getVariants = (variants: Array<Object>) => {
         return variants.sort((o1, o2) => o2["count"] - o1["count"]);
     }
 
-    function closeButtonClicked() {
+    const closeButtonClicked = () => {
         dispatch("close", {});
     }
-    function showAllOccurences() {
+    const showAllOccurences = () => {
         if ($book < 39) {
             navigate(`/strongs/hebrew/${$detailStrong.strongNr}`);
         } else {
@@ -44,7 +44,7 @@
         }
         $detailStrong.strongNr = -1;
     }
-    function getGrammarDescDe(grammar: string): string {
+    const getGrammarDescDe = (grammar: string): string => {
         if (grammar.startsWith("n-")) return "Substantiv";
         else if (grammar.startsWith("a-")) return "Adjektiv";
         else if (grammar.startsWith("t-")) return "Artikel";
@@ -90,7 +90,7 @@
         }
         return defaultVal;
     }
-    function getVerbDescDe(grammar: string): string {
+    const getVerbDescDe = (grammar: string): string => {
         let first3 = grammar.substring(0, 3);
         let first4 = grammar.substring(0, 4);
         let idx = grammar.startsWith("v-2") ? 4 : 3;

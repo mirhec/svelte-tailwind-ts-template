@@ -6,7 +6,7 @@
     export var searchFunction: (query: string) => string[];
     export var selectedItem: string;
 
-    let matches = [];
+    let matches: string[] = [];
     let activeIndex = -1;
 
     $: if (selectedItem) {
@@ -16,17 +16,16 @@
 
     $: if (query) activeIndex = -1;
 
-    function inputChanged(e) {
+    const inputChanged = (e: KeyboardEvent) => {
       if (e.key == 'Enter') {
         if (activeIndex > -1) {
           selectedItem = matches[activeIndex];
         } else {
           selectedItem = query;
         }
-      } else if (e.keyCode == 38) {
-        // up
+      } else if (e.key == 'ArrowUp') {
         activeIndex -= activeIndex > 0 ? 1 : 0;
-      } else if (e.keyCode == 40) {
+      } else if (e.key == 'ArrowDown') {
         // down
         activeIndex += activeIndex < matches.length - 1 ? 1 : 0;
       } else {
@@ -37,7 +36,7 @@
 
 <div class="field">
     {#if label}
-        <label class="label">{label}</label>
+        <span class="label">{label}</span>
     {/if}
     <div class="control">
       <div class={`dropdown ${matches.length > 0 ? "is-active" : ""}`}>

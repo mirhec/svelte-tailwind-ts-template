@@ -11,7 +11,7 @@
 	const navigate = useNavigate();
 	const translations = getTranslations();
 
-	function doNavigation(newBook, newChapter) {
+	const doNavigation = (newBook, newChapter) => {
 		if (newBook > 1 && newChapter < 0) {
 			newBook -= 1;
 			newChapter = chapterCount[newBook] - 1;
@@ -29,7 +29,7 @@
 		navigate(`/${newBook}/${newChapter}`);
 	}
 
-	function incrementChapter() {
+	const incrementChapter = () => {
 		let newChapter = $chapter;
 		let newBook = $book;
 		if ("chapter" in $params && "book" in $params) {
@@ -40,7 +40,7 @@
 		}
 		doNavigation(newBook, newChapter);
 	}
-	function decrementChapter() {
+	const decrementChapter = () => {
 		let newChapter = $chapter;
 		let newBook = $book;
 		if ("chapter" in $params && "book" in $params) {
