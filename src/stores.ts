@@ -2,9 +2,11 @@ import { writable } from 'svelte/store';
 
 export const translation1 = writable(localStorage.getItem('translation1') || 'ELB1905STR');
 export const translation2 = writable(localStorage.getItem('translation2') || 'LUTH1912');
+export const translation3 = writable(localStorage.getItem('translation3') || 'ILGRDE');
 
 translation1.subscribe(value => localStorage.setItem('translation1', value || undefined));
 translation2.subscribe(value => localStorage.setItem('translation2', value || undefined));
+translation3.subscribe(value => localStorage.setItem('translation3', value || undefined));
 
 export const searchText = writable('');
 export const originTranslation = writable('GNTTR');

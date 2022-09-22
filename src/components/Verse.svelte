@@ -10,10 +10,9 @@
     var refBook: number;
     var refChapter: number;
     var refVerse: number;
-    let strongWordDisplayVariant = 2;
     export var translation: String;
 
-    // let detailStrong: Number;
+    const punctuations = [',', ';', '.', '?', ':', '!', '"', "'"];
 
     $: if (!!verseRef) {
         refBook = verseRef['book'];
@@ -50,30 +49,14 @@
         {/if}
         {#each verse['chunks'] as chunk }
             {#if chunk['strong']}
-                {#if strongWordDisplayVariant == 1}
-                    <span class="is-size-5">{chunk['text']}
-                        <sup class="is-size-7 has-text-grey-light is-clickable"
-                            class:has-background-warning={$hoveredStrong == chunk['strong']['number']}
-                            on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
-                            on:click={() => setStrongNr(chunk['strong']['number'])}>
-                            {chunk['strong']['number']}
-                        </sup>
-                        {' '}
-                    </span>
-                {:else if strongWordDisplayVariant == 2}
-                    <span>
-                        <span class="is-size-5 strong-verse"
-                            class:has-background-warning={$hoveredStrong === chunk['strong']['number']}
-                            on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
-                            on:click={() => setStrongNr(chunk['strong']['number'])}>
-
-                            {chunk['text']}
-                        </span>
-                        {' '}
-                    </span>
-                {/if}
+                {punctuations.includes(chunk['text'][0]) ? '' : ' '}
+                <span class="is-size-5 strong-verse"
+                    class:has-background-warning={$hoveredStrong === chunk['strong']['number']}
+                    on:mouseover={() => $hoveredStrong = chunk['strong']['number']}
+                    on:click={() => setStrongNr(chunk['strong']['number'])}
+                    >{chunk['text']}</span>
             {:else}
-                <span class="is-size-5">{chunk['text'] + ' '}</span>
+                <span class="is-size-5">{punctuations.includes(chunk['text'][0]) ? '' : ' '}{chunk['text']}</span>
             {/if}
         {/each}
     </p>

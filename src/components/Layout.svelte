@@ -2,7 +2,7 @@
     import BibleText from "../components/BibleText.svelte";
 	import SearchField from "./SearchField.svelte";
 	import StrongDetails from "./StrongDetails.svelte";
-	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2, detailStrong } from "../stores";
+	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2, translation3, detailStrong } from "../stores";
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
     import { getTranslations } from '../api/bible';
@@ -77,13 +77,17 @@
 	<div class="navbar-menu">
 		<div class="navbar-start navbar-start--centered">
 			<div class="navbar-item">
-				<button class="button" on:click={decrementChapter}>Previous</button>
+				<button class="button" on:click={decrementChapter}>
+					<span class="icon"><i class="fas fa-angle-left"></i></span>
+				</button>
 			</div>
 			<div class="navbar-item">
 				<SearchField/>
 			</div>
 			<div class="navbar-item">
-				<button class="button" on:click={incrementChapter}>Next</button>
+				<button class="button" on:click={incrementChapter}>
+					<span class="icon"><i class="fas fa-angle-right"></i></span>
+				</button>
 			</div>
 		</div>
 
@@ -96,11 +100,14 @@
     <div class="conatiner">
         <div class="columns is-centered">
 			{#await translations then translationList}
-				<div class="column is-half">
+				<div class="column is-third">
 					<BibleText bind:translation={$translation1} translations={translationList} />
 				</div>
-				<div class="column is-half">
+				<div class="column is-third">
 					<BibleText bind:translation={$translation2} translations={translationList} />
+				</div>
+				<div class="column is-third">
+					<BibleText bind:translation={$translation3} translations={translationList} />
 				</div>
 			{/await}
 			{#if $detailStrong.strongNr > 0}
