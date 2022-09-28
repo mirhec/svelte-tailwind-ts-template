@@ -6,6 +6,7 @@
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
     import { getTranslations } from '../api/bible';
+	import Pagination from "./Pagination.svelte";
 
 	const params = useParams();
 	const navigate = useNavigate();
@@ -116,6 +117,8 @@
         </div>
     </div>
 </section>
+
+<Pagination/>
 
 <style lang="css">
 	.navbar-start--centered {

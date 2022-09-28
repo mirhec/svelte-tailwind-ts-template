@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, readable } from 'svelte/store';
 
 export const translation1 = writable(localStorage.getItem('translation1') || 'ELB1905STR');
 export const translation2 = writable(localStorage.getItem('translation2') || 'LUTH1912');
@@ -14,6 +14,10 @@ export const book = writable(39);
 export const chapter = writable(0);
 export const hoveredStrong = writable(0);
 export const lang = writable('en');
+export const page = writable(0);
+export const totalPages = writable(0);
+export const resultCount = writable(0);
+export const resultsPerPage = readable(25);
 
 export const detailStrong = writable({
 	strongNr: -1,
