@@ -1,16 +1,13 @@
 <script>
-    import BibleText from "../components/BibleText.svelte";
 	import SearchField from "./SearchField.svelte";
 	import StrongDetails from "./StrongDetails.svelte";
-	import { book, bookNames, chapter, chapterCount, lang, searchText, translation1, translation2, translation3, detailStrong } from "../stores";
+	import { book, bookNames, chapter, chapterCount, lang, searchText, detailStrong } from "../stores";
 	import { useParams, useNavigate } from "svelte-navigator";
 	import { to_number } from "svelte/internal";
-    import { getTranslations } from '../api/bible';
 	import Pagination from "./Pagination.svelte";
 
 	const params = useParams();
 	const navigate = useNavigate();
-	const translations = getTranslations();
 
 	const doNavigation = (newBook, newChapter) => {
 		if (newBook > 1 && newChapter < 0) {
@@ -100,17 +97,7 @@
 <section class="section">
     <div class="conatiner">
         <div class="columns is-centered">
-			{#await translations then translationList}
-				<div class="column is-third">
-					<BibleText bind:translation={$translation1} translations={translationList} />
-				</div>
-				<div class="column is-third">
-					<BibleText bind:translation={$translation2} translations={translationList} />
-				</div>
-				<div class="column is-third">
-					<BibleText bind:translation={$translation3} translations={translationList} />
-				</div>
-			{/await}
+			<slot></slot>
 			{#if $detailStrong.strongNr > 0}
 				<StrongDetails on:close={() => $detailStrong.strongNr = -1} />
 			{/if}

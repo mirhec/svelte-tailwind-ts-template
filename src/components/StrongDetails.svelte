@@ -103,20 +103,20 @@
     <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">
-            Details for {$book <= 39 ? "hebrew" : "greek"} strong #{$detailStrong.strongNr}
+            Details für {$book <= 39 ? "heb." : "gr."} Strong #{$detailStrong.strongNr}
           </p>
           <button class="delete" aria-label="close" on:click={closeButtonClicked}></button>
         </header>
         <section class="modal-card-body">
             {#await response then details}
                 {#if wordGrammar && wordGrammarUnsure}
-                    <h4 class="title is-4">Grammar: {wordGrammar} (unsure)</h4>
+                    <h4 class="title is-4">Grammatik: {wordGrammar} (unsicher)</h4>
                 {:else if wordGrammar}
-                    <h4 class="title is-4">Grammar: {wordGrammar}</h4>
+                    <h4 class="title is-4">Grammatik: {wordGrammar}</h4>
                 {/if}
                 <p class="mb-4">{getGrammarDescDe(wordGrammar)}</p>
 
-                <h4 class="title is-4">Translation variants:</h4>
+                <h4 class="title is-4">Übersetzungsvarianten:</h4>
                 <div class="ml-2">
                     <ul>
                         {#each getVariants(details["variants"]) as variant}
@@ -127,8 +127,8 @@
             {/await}
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success" on:click={showAllOccurences}>Show all occurences</button>
-          <button class="button" on:click={closeButtonClicked}>Close</button>
+          <button class="button is-success" on:click={showAllOccurences}>Alle anzeigen</button>
+          <button class="button" on:click={closeButtonClicked}>Schließen</button>
         </footer>
     </div>
     <button class="modal-close is-large" aria-label="close"></button>
